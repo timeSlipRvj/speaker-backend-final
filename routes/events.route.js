@@ -10,25 +10,9 @@ events.route("/").get(eventController.displayAllEvents);
 
 events.route("/").post(eventController.addEvent);
 
-events.route("/:id").get(async (req, res) => {
-  const id = req.params.id;
-  const event = data.find((event) => event.id == id);
-  res.status(200).json(event);
-});
+events.route("/:id").get(eventController.getEventById);
 
-events.route("/approve/:id").post(async (req, res) => {
-  const id = req.params.id;
-  const event = data.find((event) => event.id == id);
-  event.isApproved = true;
-  data[id - 1] = event;
-  res.status(200).json(event);
-});
-events.route("/reject/:id").post(async (req, res) => {
-  const id = req.params.id;
-  const event = data.find((event) => event.id == id);
-  event.isApproved = false;
-  data[id - 1] = event;
-  res.status(200).json(event);
-});
+events.route("/approve/:id").post(eventController.approve);
+events.route("/reject/:id").post(eventController.reject);
 
 module.exports = events;

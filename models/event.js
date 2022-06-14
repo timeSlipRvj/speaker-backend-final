@@ -152,13 +152,13 @@ const Event = sequelize.define("event", {
   },
 });
 
-User.hasMany(Event, {
-  foreignKey: {
-    name: "userId",
-    allowNull: false,
-  },
-});
+// User.hasMany(Event, {
+//   foreignKey: {
+//     name: "userId",
+//     allowNull: false,
+//   },
+// });
 
-Event.belongsTo(User);
+// Event.belongsTo(User);
 
 module.exports = Event;

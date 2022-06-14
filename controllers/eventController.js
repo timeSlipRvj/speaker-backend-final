@@ -44,3 +44,50 @@ module.exports.displayAllEvents = (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+
+module.exports.approve = (req, res) => {
+  Event.update(
+    {
+      isApproved: true,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((event) => {
+      return res.status(200).json(event);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.reject = (req, res) => {
+  Event.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((event) => {
+      return res.status(200).json(event);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.getEventById = (req, res) => {
+  Event.findOne({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((eventData) => {
+      return res.status(200).json(eventData);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
