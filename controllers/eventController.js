@@ -26,8 +26,7 @@ module.exports.addEvent = (req, res) => {
     isExclusive: req.body.isExclusive,
   })
     .then((eventData) => {
-      eventData = eventData.dataValues;
-      return res.status(200).json(eventData);
+      return res.status(200).json(eventData.dataValues);
     })
     .catch((err) => {
       console.log(err);
