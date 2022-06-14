@@ -7,7 +7,6 @@ opts.secretOrKey = "THISISKEY";
 
 passport.use(
   new JwtStrategy(opts, function (jwt_payload, done) {
-    // console.log("payload received", jwt_payload);
     done(null, jwt_payload);
   })
 );

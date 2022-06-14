@@ -66,14 +66,14 @@ const Event = sequelize.define("event", {
     defaultValue: false,
   },
   startTime: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   endTime: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -108,13 +108,6 @@ const Event = sequelize.define("event", {
     },
   },
   eventType: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  sessionType: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
