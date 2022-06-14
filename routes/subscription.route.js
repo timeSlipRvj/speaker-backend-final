@@ -1,5 +1,7 @@
 const express = require("express");
 const subscription = express.Router();
+const subscriptionController = require("../controllers/subscriptionPlanController");
+// const passport = require("passport");
 
 const plans = [
   {
@@ -20,8 +22,10 @@ const plans = [
   },
 ];
 
-subscription.route("/").get(async (req, res) => {
-  res.status(200).json(plans);
-});
+// subscription.use("/", passport.authenticate("jwt", { session: false }));
+
+subscription.route("/").get(subscriptionController.plans);
+subscription.route("/payment").post(subscriptionController.payment);
+subscription.route("/update").post(subscriptionController.verifypayment);
 
 module.exports = subscription;
