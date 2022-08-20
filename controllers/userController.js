@@ -82,3 +82,44 @@ module.exports.update = (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+
+module.exports.makeMod = (req, res) => {
+  const email = req.body.email;
+  User.findOne({
+    where: {
+      email: email,
+    },
+    raw: true,
+  })
+    .then((userData) => {
+      if (userData) {
+        try {
+          User.update(
+            {
+              role: "MODERATOR",
+            },
+            {
+              where: {
+                email: email,
+              },
+            }
+          )
+            .then((data) => {
+              userData = userData.dataValues;
+              return res.status(200).json(userData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
