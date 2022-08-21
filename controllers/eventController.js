@@ -90,3 +90,20 @@ module.exports.getEventById = (req, res) => {
       console.log(err);
     });
 };
+
+module.exports.removeEvent = (req, res) => {
+  Event.destroy({
+    where: {
+      id: req.body.id,
+    },
+  })
+    .then((event) => {
+      return res.status(200).json({
+        success: true,
+        message: "Event removed successfully",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

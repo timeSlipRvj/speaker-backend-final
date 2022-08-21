@@ -14,5 +14,6 @@ events.route("/:id").get(eventController.getEventById);
 
 events.route("/approve/:id").post(eventController.approve);
 events.route("/reject/:id").post(eventController.reject);
+events.route("/eventremove").post(eventController.removeEvent);
 
 module.exports = events;
