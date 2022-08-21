@@ -150,6 +150,13 @@ const Event = sequelize.define("event", {
     },
     defaultValue: false,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 });
 
 // User.hasMany(Event, {

@@ -3,10 +3,11 @@ const express = require("express");
 const app = express();
 const sequelize = require("./config/sequelize");
 const host = process.env.HOST || "localhost";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const sqlite = require("better-sqlite3");
+const { addUser, addSubscriptionPlan } = require("./startup/addData");
 
 // Startup Routes
 require("./startup/routes")(app);
@@ -38,6 +39,8 @@ sequelize
     return console.log("Successfully connected to database");
   })
   .then(() => {
+    addUser();
+    addSubscriptionPlan();
     return app.listen(port, () => {
       console.log(`App listening at http://${host}:${port}`);
     });

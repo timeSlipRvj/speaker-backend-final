@@ -123,3 +123,93 @@ module.exports.makeMod = (req, res) => {
     })
     .catch((err) => console.log(err));
 };
+module.exports.makeTeam = (req, res) => {
+  const email = req.body.email;
+  User.findOne({
+    where: {
+      email: email,
+    },
+    raw: true,
+  })
+    .then((userData) => {
+      if (userData) {
+        try {
+          User.update(
+            {
+              role: "TEAM",
+            },
+            {
+              where: {
+                email: email,
+              },
+            }
+          )
+            .then((data) => {
+              userData = userData.dataValues;
+              return res.status(200).json(userData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
+module.exports.makeUser = (req, res) => {
+  const email = req.body.email;
+  User.findOne({
+    where: {
+      email: email,
+    },
+    raw: true,
+  })
+    .then((userData) => {
+      if (userData) {
+        try {
+          User.update(
+            {
+              role: "USER",
+            },
+            {
+              where: {
+                email: email,
+              },
+            }
+          )
+            .then((data) => {
+              userData = userData.dataValues;
+              return res.status(200).json(userData);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+module.exports.allUsers = (req, res) => {
+  User.findAll({
+    raw: true,
+  })
+    .then((users) => {
+      return res.status(200).json(users);
+    })
+    .catch((err) => console.log(err));
+};
