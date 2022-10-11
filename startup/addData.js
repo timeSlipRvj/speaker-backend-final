@@ -205,7 +205,7 @@ const addSubscriptionPlan = () => {
             id: 1,
             name: "Golden",
             duration: 1,
-            price: 1000,
+            price: 11999,
             disable: false,
             features: "1GB of storage, 1GB of bandwidth",
           })
