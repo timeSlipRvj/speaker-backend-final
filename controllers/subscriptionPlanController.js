@@ -47,7 +47,7 @@ module.exports.payment = (req, res) => {
         instance.orders.create(options, (error, order) => {
           if (error) {
             console.log(error);
-            return res.status(500).json({ message: "Something Went Wrong!" });
+            return res.status(500).json({ message: error });
           }
           res.status(200).json({ data: order });
         });
@@ -60,7 +60,7 @@ module.exports.payment = (req, res) => {
       console.log(err);
       return res.status(400).json({
         success: false,
-        message: "Something went wrong",
+        message: err,
       });
     });
 };
@@ -104,7 +104,7 @@ module.exports.verifypayment = (req, res) => {
       console.log(err);
       return res.status(400).json({
         success: false,
-        message: "Something went wrong",
+        message: err,
       });
     });
 };
